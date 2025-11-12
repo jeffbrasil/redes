@@ -128,41 +128,6 @@ def calcular_crc_manual(dados_bits: str, gerador_bits: str) -> str:
     """
     # 1. Obtenha o grau 'r' do gerador.
     #    Lembre-se que um gerador de n bits representa um polinômio de grau n-1.
-    r = len(gerador_bits) - 1
-    
-    # 2. Crie M(x) * 2^r, que é a mensagem com 'r' zeros anexados.
-    mensagem_aumentada = list(dados_bits + '0' * r)
-    
-    # 3. Implemente o loop de divisão.
-    #    Percorra a mensagem bit a bit.
-    for i in range(len(dados_bits)):
-        # Se o bit mais significativo da 'janela' atual for '1', realize o XOR.
-        # - a janela 
-        if mensagem_aumentada[i] == '1':
-            janela_atual = "".join(mensagem_aumentada[i : i + r + 1])
-            resultado_xor = xor_bits(janela_atual, gerador_bits)
-            
-            # Atualize a mensagem com o resultado do XOR.
-            for j in range(len(resultado_xor)):
-                mensagem_aumentada[i + j + 1] = resultado_xor[j]
-    
-    # 4. O resto da divisão são os 'r' bits finais da mensagem processada.
-    resto = "".join(mensagem_aumentada[-r:])
-    return resto
-
-def calcular_crc_manual(dados_bits: str, gerador_bits: str) -> str:
-    """
-    Calcula o CRC para uma sequência de dados M(x) usando um gerador G(x).
-    
-    Args:
-        dados_bits: A string binária representando o polinômio da mensagem, M(x).
-        gerador_bits: A string binária representando o polinômio gerador, G(x).
-        
-    Returns:
-        A string binária de r bits representando o CRC.
-    """
-    # 1. Obtenha o grau 'r' do gerador.
-    #    Lembre-se que um gerador de n bits representa um polinômio de grau n-1.
     r = -1
 
     # 2. Crie T(x)=  M(x) * 2^r, que é a mensagem com 'r' zeros anexados.
